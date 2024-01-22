@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { test } from "../../context/ChatContext";
 
 interface AdminPopupProps {
@@ -43,7 +44,7 @@ const AdminPopup: React.FC<AdminPopupProps> = (props: AdminPopupProps) => {
       ?.split("=")[1];
     if (tk === undefined) return;
     // Set User as Admin
-    fetch("http://10.12.8.6:3000/user/add-admin", {
+    fetch(`http://${domain}:3000/user/add-admin`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${tk}`,
@@ -83,7 +84,7 @@ const AdminPopup: React.FC<AdminPopupProps> = (props: AdminPopupProps) => {
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
   if (tk === undefined) return;
-  fetch(`http://10.12.8.6:3000/user/channelParticipants/${props.channelId}`, {
+  fetch(`http://${domain}:3000/user/channelParticipants/${props.channelId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${tk}`,

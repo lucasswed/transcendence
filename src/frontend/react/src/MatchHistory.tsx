@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
+import { domain } from "./util";
 
 interface User {
   id: string;
@@ -36,7 +37,7 @@ const MatchHistory = ({ id, prof }: props) => {
       ?.split("=")[1];
     if (token === undefined || id === undefined || id === "") return;
 
-    fetch(`http://10.12.8.6:3000/user/matches/${id}`, {
+    fetch(`http://${domain}:3000/user/matches/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,22 +86,30 @@ const MatchHistory = ({ id, prof }: props) => {
               <span>
                 <a
                   onClick={() => {
-                   {prof !== "AI" && handleNavigate(match.winner.login);
-                  } {prof === "AI" && handleNavigate(match.loser.login);
-                }}}
+                    {
+                      prof !== "AI" && handleNavigate(match.winner.login);
+                    }
+                    {
+                      prof === "AI" && handleNavigate(match.loser.login);
+                    }
+                  }}
                 >
-                  {(prof !== "AI" || match.winner.login !== "AI") && <img
-                    src={match.winner.image}
-                    className="img-responsive"
-                    title={`See the ${match.winner.login} profile`}
-                    alt="#"
-                  ></img>}
-                  {(prof === "AI" || match.loser.login === "AI") && <img
-                    src={match.loser.image}
-                    className="img-responsive"
-                    title={`See the ${match.loser.login} profile`}
-                    alt="#"
-                  ></img>}
+                  {(prof !== "AI" || match.winner.login !== "AI") && (
+                    <img
+                      src={match.winner.image}
+                      className="img-responsive"
+                      title={`See the ${match.winner.login} profile`}
+                      alt="#"
+                    ></img>
+                  )}
+                  {(prof === "AI" || match.loser.login === "AI") && (
+                    <img
+                      src={match.loser.image}
+                      className="img-responsive"
+                      title={`See the ${match.loser.login} profile`}
+                      alt="#"
+                    ></img>
+                  )}
                 </a>
               </span>
               <span>

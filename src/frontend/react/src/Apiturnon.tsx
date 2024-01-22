@@ -2,6 +2,7 @@ import { useState } from "react";
 import { navigate } from "wouter/use-location";
 import "./Profile.css";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface UseturnoffProps {
   code: string;
@@ -22,7 +23,7 @@ const Useturnoff = ({ code, handleClose }: UseturnoffProps) => {
         ?.split("=")[1];
       if (token === undefined) return;
 
-      const res = await fetch("http://10.12.8.6:3000/auth/2fa/turn-on", {
+      const res = await fetch(`http://${domain}:3000/auth/2fa/turn-on`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

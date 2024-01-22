@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface UseAuthProps {
   code: string;
@@ -22,7 +23,7 @@ const UseAuth = ({ code }: UseAuthProps) => {
       if (token === undefined) return;
 
       const UpResponse = await fetch(
-        "http://10.12.8.6:3000/auth/2fa/authentication",
+        `http://${domain}:3000/auth/2fa/authentication`,
         {
           method: "POST",
           headers: {

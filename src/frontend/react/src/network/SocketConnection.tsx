@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import io from "socket.io-client";
+import { domain } from "../util";
 
 export var socketIoRef: SocketIoReference.Socket;
 export var currentUsername: string | null;
@@ -8,7 +9,7 @@ export var currentRoom: string | null;
 export const Connection: React.FunctionComponent = () => {
   socketIoRef = useRef<SocketIoReference.Socket>();
   useEffect(() => {
-    socketIoRef.current = io("http://10.12.8.6:3000/chat", {}).connect();
+    socketIoRef.current = io(`http://${domain}:3000/chat`, {}).connect();
 
     socketIoRef.current.on("connect", () => {
       // console.log('Client connected')

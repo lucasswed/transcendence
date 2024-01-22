@@ -4,6 +4,7 @@ import Friendfriend from "./FriendFriend";
 import MatchHistory from "./MatchHistory";
 import "./Profile.css";
 import ScoreBar from "./ScoreBar";
+import { domain } from "./util";
 
 // interface User {
 // 	id: string,
@@ -37,7 +38,7 @@ const FriendProfile = ({ login }: props) => {
         if (token === undefined || login === undefined) return;
 
         const response = await fetch(
-          `http://10.12.8.6:3000/user/find/login/${login}`,
+          `http://${domain}:3000/user/find/login/${login}`,
           {
             method: "GET",
             headers: {
@@ -140,7 +141,7 @@ const FriendProfile = ({ login }: props) => {
           </div>
         </nav>
         <div className="tab-content" id="nav-tabContent">
-          <MatchHistory id={id} prof={login}/>
+          <MatchHistory id={id} prof={login} />
           <div
             className="tab-pane fade"
             id="project_worked"

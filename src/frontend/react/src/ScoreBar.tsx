@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
+import { domain } from "./util";
 
 interface props {
   id: string;
@@ -18,7 +19,7 @@ const ScoreBar = ({ id }: props) => {
       if (token === undefined || id == undefined || id === "") return;
 
       const response = await fetch(
-        `http://10.12.8.6:3000/user/matches-wins/${id}`,
+        `http://${domain}:3000/user/matches-wins/${id}`,
         {
           method: "GET",
           headers: {

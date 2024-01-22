@@ -6,6 +6,7 @@ import ApiData2faProvider from "./ApiData2faProvider.tsx";
 import "./App.css";
 import Website from "./Website.tsx";
 import { useApi } from "./apiStore.tsx";
+import { domain } from "./util.ts";
 
 function App() {
   const { auth, setauth } = useApi();
@@ -24,7 +25,7 @@ function App() {
   useEffect(() => {
     if (token && token2fa) {
       console.debug("Both tokens");
-      document.cookie = `${"token2fa"}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=10.12.8.6;`;
+      document.cookie = `${"token2fa"}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${domain};`;
       navigate("/");
     } else if (token2fa) {
       console.debug("Just 2fa token");
@@ -42,7 +43,7 @@ function App() {
     }
   }, [token, token2fa, navigate, auth]);
   const handleButtonClick = () => {
-    window.location.href = "http://10.12.8.6:3000/auth/login";
+    window.location.href = `http://${domain}:3000/auth/login`;
   };
 
   return (

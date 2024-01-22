@@ -8,6 +8,7 @@ import {
 } from "./ProfileContext";
 import { useApi } from "./apiStore";
 import { test } from "./chat/context/ChatContext";
+import { domain } from "./util";
 
 interface BlockPopupProps {
   isVisible: boolean;
@@ -58,7 +59,7 @@ const BlockPopup: React.FC<BlockPopupProps> = ({ isVisible, handleClose }) => {
       ?.split("=")[1];
     if (auth === false || token === undefined) return;
     // console.log("BLOCK REQUEST: DATA PASSED TO THE BACKEND", id, userToBlock.id);
-    fetch(`http://10.12.8.6:3000/user/block-user`, {
+    fetch(`http://${domain}:3000/user/block-user`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

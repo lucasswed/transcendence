@@ -1,5 +1,6 @@
 import { navigate } from "wouter/use-location";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface UsetwofaProps {
   handleClose: () => void;
@@ -18,7 +19,7 @@ const Usetwofa = ({ handleClose }: UsetwofaProps) => {
         ?.split("=")[1];
       if (token === undefined) return;
 
-      const response = await fetch("http://10.12.8.6:3000/auth/2fa/turn-off", {
+      const response = await fetch(`http://${domain}:3000/auth/2fa/turn-off`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

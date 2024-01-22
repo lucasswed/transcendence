@@ -4,6 +4,7 @@ import React, { ReactNode, createContext, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../apiStore";
+import { domain } from "../../util";
 import { MessageData } from "../components/chat/Messages";
 
 interface ChatContextProps {
@@ -48,7 +49,7 @@ function ChatProvider({ children }: ChatProviderProps) {
       ?.split("=")[1];
     if (!tk) return;
 
-    fetch(`http://10.12.8.6:3000/user/chatRooms`, {
+    fetch(`http://${domain}:3000/user/chatRooms`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tk}`,
@@ -81,7 +82,7 @@ function ChatProvider({ children }: ChatProviderProps) {
       .find((row) => row.startsWith("token="))
       ?.split("=")[1];
     if (channelSelected) {
-      fetch(`http://10.12.8.6:3000/user/chatHistory/${channelSelected}`, {
+      fetch(`http://${domain}:3000/user/chatHistory/${channelSelected}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${tk}`,
@@ -126,7 +127,7 @@ function ChatProvider({ children }: ChatProviderProps) {
       .find((row) => row.startsWith("token="))
       ?.split("=")[1];
     if (channelSelected) {
-      fetch(`http://10.12.8.6:3000/user/chatHistory/${channelSelected}`, {
+      fetch(`http://${domain}:3000/user/chatHistory/${channelSelected}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${tk}`,
@@ -164,7 +165,7 @@ function ChatProvider({ children }: ChatProviderProps) {
   };
 
   useEffect(() => {
-    socketInstance = io("http://10.12.8.6:3000/chat").connect();
+    socketInstance = io(`http://${domain}:3000/chat`).connect();
 
     socketInstance.on("connect", () => {
       socketInstance.emit("userConnected", {

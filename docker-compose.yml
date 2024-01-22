@@ -26,6 +26,8 @@ services:
     ports:
       - 5173:5173
     container_name: frontend
+    env_file:
+      - ./src/backend/nest/.env
     depends_on:
       - backend
     user: root

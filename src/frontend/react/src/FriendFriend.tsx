@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
+import { domain } from "./util";
 
 interface User {
   id: string;
@@ -27,7 +28,7 @@ const Friendfriend = ({ id }: props) => {
       ?.split("=")[1];
     if (token === undefined || id === undefined || id === "") return;
 
-    fetch(`http://10.12.8.6:3000/user/friends/${id}`, {
+    fetch(`http://${domain}:3000/user/friends/${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

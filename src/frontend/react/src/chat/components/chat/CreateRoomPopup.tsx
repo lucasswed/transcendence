@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { ProfileContext } from "../../../ProfileContext";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { test } from "../../context/ChatContext";
 
 interface CreateRoomPopupProps {
@@ -148,7 +149,7 @@ const CreateRoomPopup: React.FC<CreateRoomPopupProps> = ({
         .find((row) => row.startsWith("token="))
         ?.split("=")[1];
 
-      fetch(`http://10.12.8.6:3000/user/add-room`, {
+      fetch(`http://${domain}:3000/user/add-room`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

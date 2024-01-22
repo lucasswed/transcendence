@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { test, updateChatRooms } from "../../context/ChatContext";
 
 interface JoinRoomPopupProps {
@@ -37,7 +38,7 @@ const JoinRoomPopup: React.FC<JoinRoomPopupProps> = ({
       .split("; ")
       .find((row) => row.startsWith("token="))
       ?.split("=")[1];
-    fetch(`http://10.12.8.6:3000/user/joinable-rooms`, {
+    fetch(`http://${domain}:3000/user/joinable-rooms`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -97,7 +98,7 @@ const JoinRoomPopup: React.FC<JoinRoomPopupProps> = ({
       .find((row) => row.startsWith("token="))
       ?.split("=")[1];
 
-    fetch(`http://10.12.8.6:3000/user/join-room`, {
+    fetch(`http://${domain}:3000/user/join-room`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

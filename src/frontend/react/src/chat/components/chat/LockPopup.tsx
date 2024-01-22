@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { updateChatRooms } from "../../context/ChatContext";
 
 interface LockPopupProps {
@@ -32,7 +33,7 @@ const LockPopup: React.FC<LockPopupProps> = (props: LockPopupProps) => {
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
 
-  fetch(`http://10.12.8.6:3000/user/chatRoom/${props.channelId}`, {
+  fetch(`http://${domain}:3000/user/chatRoom/${props.channelId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${tk}`,
@@ -70,7 +71,7 @@ const LockPopup: React.FC<LockPopupProps> = (props: LockPopupProps) => {
         .find((row) => row.startsWith("token="))
         ?.split("=")[1];
       fetch(
-        `http://10.12.8.6:3000/user/update-room-privacy/${props.channelId}`,
+        `http://${domain}:3000/user/update-room-privacy/${props.channelId}`,
         {
           method: "POST",
           headers: {
@@ -114,7 +115,7 @@ const LockPopup: React.FC<LockPopupProps> = (props: LockPopupProps) => {
         .find((row) => row.startsWith("token="))
         ?.split("=")[1];
       fetch(
-        `http://10.12.8.6:3000/user/update-room-privacy/${props.channelId}`,
+        `http://${domain}:3000/user/update-room-privacy/${props.channelId}`,
         {
           method: "POST",
           headers: {

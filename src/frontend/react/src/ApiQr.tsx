@@ -1,6 +1,7 @@
 import React, { ReactNode, useEffect } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface ApiQrProps {
   children?: ReactNode;
@@ -20,7 +21,7 @@ const ApiQr: React.FC<ApiQrProps> = (props) => {
 
       try {
         const response = await fetch(
-          "http://10.12.8.6:3000/auth/2fa/generate",
+          `http://${domain}:3000/auth/2fa/generate`,
           {
             method: "GET",
             headers: {

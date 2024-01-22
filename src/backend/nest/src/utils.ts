@@ -11,3 +11,5 @@ export const validatePassword = async (
 ): Promise<boolean> => {
   return bcrypt.compare(plainTextPassword, hashedPassword);
 };
+
+export const domain = '172.28.92.166';

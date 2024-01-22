@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { ChatData } from "../sidebar/ChatInfo";
 import AdminPopup from "./AdminPopup";
 import BanPopup from "./BanPopup";
@@ -96,7 +97,7 @@ const ChatContent = (props: ChatContentProps) => {
           .find((row) => row.startsWith("token="))
           ?.split("=")[1];
         const response = await fetch(
-          `http://10.12.8.6:3000/user/chatRoom/${props.selectedChatData.id}`,
+          `http://${domain}:3000/user/chatRoom/${props.selectedChatData.id}`,
           {
             method: "GET",
             headers: {

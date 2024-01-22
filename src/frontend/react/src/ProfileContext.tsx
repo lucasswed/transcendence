@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface ProfileContextProps {
   userFriends: any;
@@ -38,7 +39,7 @@ function ProfileProvider({ children }: ProfileProviderProps) {
   updateUserFriends = () => {
     if (auth === false) return;
 
-    fetch(`http://10.12.8.6:3000/user/friends`, {
+    fetch(`http://${domain}:3000/user/friends`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tk}`,
@@ -69,7 +70,7 @@ function ProfileProvider({ children }: ProfileProviderProps) {
   };
 
   updateBlockableUsers = () => {
-    fetch(`http://10.12.8.6:3000/user/blockable-users`, {
+    fetch(`http://${domain}:3000/user/blockable-users`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tk}`,
@@ -105,7 +106,7 @@ function ProfileProvider({ children }: ProfileProviderProps) {
       ?.split("=")[1];
     if (auth === false || tk === undefined) return;
 
-    fetch(`http://10.12.8.6:3000/user/friends`, {
+    fetch(`http://${domain}:3000/user/friends`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tk}`,
@@ -133,7 +134,7 @@ function ProfileProvider({ children }: ProfileProviderProps) {
       })
       .catch((error) => console.error("Fetch error:", error));
 
-    fetch(`http://10.12.8.6:3000/user/blockable-users`, {
+    fetch(`http://${domain}:3000/user/blockable-users`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${tk}`,

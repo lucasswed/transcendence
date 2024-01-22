@@ -4,6 +4,7 @@ import { navigate } from "wouter/use-location";
 import NotifList from "./NotifList.tsx";
 import { useApi } from "./apiStore.tsx";
 import { usecollapseSidebar } from "./collapseSidebar.tsx";
+import { domain } from "./util.ts";
 
 const Topbar = () => {
   const { setOpen, isOpen } = usecollapseSidebar();
@@ -21,7 +22,7 @@ const Topbar = () => {
 
   const handleClickLogout = () => {
     if (token !== undefined) {
-      document.cookie = `${"token"}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=10.12.8.6;`;
+      document.cookie = `${"token"}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${domain};`;
       navigate("/login");
     }
   };

@@ -3,6 +3,7 @@
 import React, { useEffect, useReducer } from "react";
 import { io } from "socket.io-client";
 import { useApi } from "../../apiStore";
+import { domain } from "../../util";
 import { Match } from "../types/Match";
 import { Room } from "../types/Room";
 
@@ -32,7 +33,7 @@ const initialState: state = {
   socketId: "",
 };
 
-const socket = io("http://10.12.8.6:3000/gamer", { autoConnect: false });
+const socket = io(`http://${domain}:3000/gamer`, { autoConnect: false });
 
 const disconnect = () => {
   socket.off("connect");

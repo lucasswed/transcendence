@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect } from "react";
 import { useParams } from "wouter";
 import { navigate } from "wouter/use-location";
 import { useApi } from "./apiStore";
+import { domain } from "./util";
 
 interface ApiDataProviderProps {
   children?: ReactNode;
@@ -20,7 +21,7 @@ const ApiDataProvider: React.FC<ApiDataProviderProps> = (props) => {
           ?.split("=")[1];
         if (token === undefined || auth === false) return;
 
-        const response = await fetch("http://10.12.8.6:3000/user/me", {
+        const response = await fetch(`http://${domain}:3000/user/me`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,7 +34,7 @@ const ApiDataProvider: React.FC<ApiDataProviderProps> = (props) => {
           }
           return;
         }
-        const friends = await fetch("http://10.12.8.6:3000/user/friends", {
+        const friends = await fetch(`http://${domain}:3000/user/friends`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

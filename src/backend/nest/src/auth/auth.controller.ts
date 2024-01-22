@@ -18,6 +18,7 @@ import { GetMe } from 'src/decorators';
 import { FTAuthExceptionFilter } from 'src/filters';
 import { InputStringValidationPipe } from 'src/pipes';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { domain } from 'src/utils';
 import { FTGuard, JwtAuthGuard } from '../auth/guard';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
@@ -57,7 +58,7 @@ export class AuthController {
         res
           .cookie('token2fa', token, {
             expires: new Date(Date.now() + 2 * 60 * 1000),
-            domain: '10.12.8.6',
+            domain: domain,
             path: '/',
             // sameSite: false,
             // secure: true,
@@ -75,7 +76,7 @@ export class AuthController {
     res
       .cookie('token', data.accessToken, {
         expires: new Date(Date.now() + 14 * 60 * 1000),
-        domain: '10.12.8.6',
+        domain: domain,
         path: '/',
         // sameSite: 'none',
         // secure: true,
@@ -192,7 +193,7 @@ export class AuthController {
     res
       .cookie('token', token, {
         expires: new Date(Date.now() + 14 * 60 * 1000),
-        domain: '10.12.8.6',
+        domain: domain,
         path: '/',
       })
       .send();

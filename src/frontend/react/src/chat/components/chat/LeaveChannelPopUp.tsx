@@ -1,5 +1,6 @@
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
+import { domain } from "../../../util";
 import { updateChatRooms } from "../../context/ChatContext";
 import { ChatData } from "../sidebar/ChatInfo";
 
@@ -24,7 +25,7 @@ const LeaveChannelPopUp: React.FC<LeaveChannelProps> = (
       .split("; ")
       .find((row) => row.startsWith("token="))
       ?.split("=")[1];
-    fetch(`http://10.12.8.6:3000/user/leave-room`, {
+    fetch(`http://${domain}:3000/user/leave-room`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${tk}`,

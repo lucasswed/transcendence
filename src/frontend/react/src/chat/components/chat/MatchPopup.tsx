@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { navigate } from "wouter/use-location";
 import { useApi } from "../../../apiStore";
 import { joinRoomInvite } from "../../../realPong/context/SocketContext";
+import { domain } from "../../../util";
 import { ChatContext } from "../../context/ChatContext";
 
 interface MatchPopupProps {
@@ -70,7 +71,7 @@ const MatchPopup: React.FC<MatchPopupProps> = (props: MatchPopupProps) => {
     .split("; ")
     .find((row) => row.startsWith("token="))
     ?.split("=")[1];
-  fetch(`http://10.12.8.6:3000/user/chatRoom/${props.channelId}`, {
+  fetch(`http://${domain}:3000/user/chatRoom/${props.channelId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${tk}`,
